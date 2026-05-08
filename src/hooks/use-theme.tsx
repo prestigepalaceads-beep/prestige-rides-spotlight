@@ -20,18 +20,18 @@ function setGlobalTheme(t: Theme) {
   listeners.forEach((l) => l(t));
 }
 
-if (typeof window !== "undefined") {
-  try {
-    const stored = localStorage.getItem(KEY) as Theme | null;
-    currentTheme = stored ?? "dark";
-  } catch {}
-  applyTheme(currentTheme);
-}
-
 export function useTheme() {
   const [theme, setThemeState] = useState<Theme>(currentTheme);
 
   useEffect(() => {
+    try {
+      const stored = localStorage.getItem(KEY) as Theme | null;
+      if (stored && stored !== currentTheme) {
+        setGlobalTheme(stored);
+      } else {
+        applyTheme(currentTheme);
+      }
+    } catch {}
     setThemeState(currentTheme);
     const listener = (t: Theme) => setThemeState(t);
     listeners.add(listener);
