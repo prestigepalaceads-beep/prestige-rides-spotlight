@@ -94,10 +94,10 @@ function CarDetailPage() {
               <img src={car.img} alt={car.title} className="h-full w-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-onyx/70 via-transparent to-transparent" />
               <div className="absolute top-5 left-5 flex gap-2">
-                <span className="px-3 py-1.5 bg-onyx/80 backdrop-blur-md border border-primary/40 text-[10px] tracking-[0.3em] uppercase text-primary">
+                <span className="px-3 py-1.5 bg-onyx/80 backdrop-blur-md border border-primary/40 text-[10px] tracking-[0.3em] uppercase text-primary rounded-full">
                   {car.status}
                 </span>
-                <span className="px-3 py-1.5 bg-onyx/80 backdrop-blur-md border border-primary/40 text-[10px] tracking-[0.3em] uppercase text-primary">
+                <span className="px-3 py-1.5 bg-onyx/80 backdrop-blur-md border border-primary/40 text-[10px] tracking-[0.3em] uppercase text-primary rounded-full">
                   {car.category}
                 </span>
               </div>
