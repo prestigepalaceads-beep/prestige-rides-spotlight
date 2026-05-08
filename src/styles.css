@@ -4,9 +4,46 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Self-hosted display + body fonts */
+@font-face {
+  font-family: "Ethnocentric";
+  src: url("/fonts/Ethnocentric-Regular.otf") format("opentype");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Jura";
+  src: url("/fonts/Jura-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Jura";
+  src: url("/fonts/Jura-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Jura";
+  src: url("/fonts/Jura-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Jura";
+  src: url("/fonts/Jura-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme inline {
-  --font-display: "Orbitron", "Inter", system-ui, sans-serif;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Ethnocentric", "Jura", system-ui, sans-serif;
+  --font-sans: "Jura", "Inter", system-ui, sans-serif;
   --font-arabic: "Reem Kufi", "Noto Sans Arabic", system-ui, sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);
