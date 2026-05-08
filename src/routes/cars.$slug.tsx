@@ -89,7 +89,7 @@ function CarDetailPage() {
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
-              className="relative aspect-[4/3] overflow-hidden border border-primary/30"
+              className="relative aspect-[4/3] overflow-hidden border border-primary/30 rounded-2xl"
             >
               <img src={car.img} alt={car.title} className="h-full w-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-onyx/70 via-transparent to-transparent" />
