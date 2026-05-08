@@ -6,9 +6,7 @@ import { CarSlider, type Car } from "@/components/CarSlider";
 import { SectionHeading } from "@/components/SectionHeading";
 import { cars as allCars } from "@/data/cars";
 
-import blog1 from "@/assets/blog-1.jpg";
-import blog2 from "@/assets/blog-2.jpg";
-import blog3 from "@/assets/blog-3.jpg";
+import { blogPosts } from "@/data/blogs";
 import about from "@/assets/about.jpg";
 
 export const Route = createFileRoute("/")({
@@ -28,11 +26,7 @@ const toCard = (c: typeof allCars[number]): Car => ({
 const featured: Car[] = allCars.filter((c) => c.category === "Normal").map(toCard);
 const armoured: Car[] = allCars.filter((c) => c.category === "Armoured").map(toCard);
 
-const blogs = [
-  { img: blog1, cat: "Detailing", title: "The Art of the Showroom Finish", date: "May 02, 2026", excerpt: "How master detailers transform metal into mirrors — a study in obsession." },
-  { img: blog2, cat: "Ownership", title: "Beyond the Key: A Buyer's Ritual", date: "Apr 21, 2026", excerpt: "Acquiring a flagship is never transactional. It's an inheritance of craft." },
-  { img: blog3, cat: "Service", title: "Mechanical Poetry", date: "Apr 09, 2026", excerpt: "Inside the workshop where every torque setting is whispered, never barked." },
-];
+const blogs = blogPosts.slice(0, 3);
 
 function Index() {
   return (
@@ -119,27 +113,30 @@ function Index() {
 
           <div className="grid md:grid-cols-3 gap-6">
             {blogs.map((b, i) => (
-              <motion.article
-                key={b.title}
+              <motion.div
+                key={b.slug}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="group cursor-pointer"
               >
-                <div className="relative aspect-[4/3] overflow-hidden mb-6 border border-border rounded-2xl">
-                  <img src={b.img} alt={b.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.2s] group-hover:scale-105" />
-                  <div className="absolute top-4 left-4 px-3 py-1.5 bg-onyx/80 backdrop-blur text-[10px] tracking-[0.3em] uppercase text-primary border border-primary/30 rounded-full">
-                    {b.cat}
-                  </div>
-                </div>
-                <p className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-3">{b.date}</p>
-                <h3 className="font-display text-2xl leading-tight group-hover:text-primary transition-colors">{b.title}</h3>
-                <p className="mt-3 text-sm text-foreground/65 leading-relaxed">{b.excerpt}</p>
-                <span className="mt-4 inline-flex items-center gap-2 text-xs tracking-[0.3em] uppercase text-primary">
-                  Read <ArrowRight size={14} />
-                </span>
-              </motion.article>
+                <Link to="/blogs/$slug" params={{ slug: b.slug }} className="group block">
+                  <article>
+                    <div className="relative aspect-[4/3] overflow-hidden mb-6 border border-border rounded-2xl">
+                      <img src={b.img} alt={b.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.2s] group-hover:scale-105" />
+                      <div className="absolute top-4 left-4 px-3 py-1.5 bg-onyx/80 backdrop-blur text-[10px] tracking-[0.3em] uppercase text-primary border border-primary/30 rounded-full">
+                        {b.cat}
+                      </div>
+                    </div>
+                    <p className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-3">{b.date}</p>
+                    <h3 className="font-display text-2xl leading-tight group-hover:text-primary transition-colors">{b.title}</h3>
+                    <p className="mt-3 text-sm text-foreground/65 leading-relaxed">{b.excerpt}</p>
+                    <span className="mt-4 inline-flex items-center gap-2 text-xs tracking-[0.3em] uppercase text-primary">
+                      Read <ArrowRight size={14} />
+                    </span>
+                  </article>
+                </Link>
+              </motion.div>
             ))}
           </div>
         </div>
