@@ -51,7 +51,7 @@ export function HeroSlider() {
         </div>
       </div>
 
-      <div className="absolute inset-0 flex items-center">
+      <div className="pointer-events-none absolute inset-0 flex items-center">
         <div className="mx-auto max-w-[1400px] w-full px-6 lg:px-10">
           <AnimatePresence mode="wait">
             <motion.div
@@ -73,7 +73,7 @@ export function HeroSlider() {
                 {slides[index].sub}
               </p>
               <div className="mt-10 flex gap-4 items-center">
-                <Link to={slides[index].to} className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-gold text-primary-foreground text-xs tracking-[0.3em] uppercase font-medium hover:shadow-gold transition-all">
+                <Link to={slides[index].to} className="pointer-events-auto group inline-flex items-center gap-3 px-8 py-4 bg-gradient-gold text-primary-foreground text-xs tracking-[0.3em] uppercase font-medium hover:shadow-gold transition-all">
                   {slides[index].cta}
                   <ArrowRight size={16} className="transition-transform group-hover:translate-x-1 rtl:-scale-x-100" />
                 </Link>
