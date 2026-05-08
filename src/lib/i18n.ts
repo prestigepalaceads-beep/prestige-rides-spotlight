@@ -12,6 +12,7 @@ export const translations = {
     "nav.cars": "Cars",
     "nav.services": "Services",
     "nav.blogs": "Blogs",
+    "nav.about": "About Us",
     "nav.contact": "Contact Us",
     "nav.visitShowroom": "Visit Showroom",
 
@@ -91,6 +92,7 @@ export const translations = {
     "nav.cars": "السيارات",
     "nav.services": "الخدمات",
     "nav.blogs": "المدونة",
+    "nav.about": "من نحن",
     "nav.contact": "تواصل معنا",
     "nav.visitShowroom": "زيارة المعرض",
 

@@ -20,6 +20,7 @@ export function SiteHeader() {
     { to: "/cars", label: t("nav.cars") },
     { to: "/services", label: t("nav.services") },
     { to: "/blogs", label: t("nav.blogs") },
+    { to: "/about", label: t("nav.about") },
     { to: "/contact", label: t("nav.contact") },
   ] as const;
 
