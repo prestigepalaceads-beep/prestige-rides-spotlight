@@ -42,9 +42,9 @@
 }
 
 @theme inline {
-  --font-display: "Ethnocentric", "Jura", system-ui, sans-serif;
-  --font-sans: "Jura", "Inter", system-ui, sans-serif;
-  --font-arabic: "Reem Kufi", "Noto Sans Arabic", system-ui, sans-serif;
+  --font-display: "Michroma", system-ui, sans-serif;
+  --font-sans: "Michroma", system-ui, sans-serif;
+  --font-arabic: "Tajawal", system-ui, sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
