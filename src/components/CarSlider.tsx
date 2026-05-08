@@ -108,7 +108,7 @@ function CarCard({ car }: { car: Car }) {
     : {};
   return (
     <Wrapper {...wrapperProps} className="block">
-      <article className="group relative bg-card border border-border overflow-hidden transition-all duration-500 hover:border-primary/60">
+      <article className="group relative bg-card border border-border overflow-hidden rounded-2xl transition-all duration-500 hover:border-primary/60">
         <div className="relative aspect-[4/3] overflow-hidden bg-onyx">
           <img
             src={car.img}
