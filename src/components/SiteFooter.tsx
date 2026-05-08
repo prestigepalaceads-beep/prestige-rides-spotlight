@@ -44,9 +44,9 @@ export function SiteFooter() {
           <div>
             <h4 className="text-xs uppercase tracking-[0.3em] text-primary mb-6">Contact</h4>
             <ul className="space-y-4 text-sm text-foreground/75">
-              <li className="flex gap-3"><MapPin size={16} className="mt-0.5 text-primary shrink-0" /> Sheikh Zayed Road, Dubai, UAE</li>
-              <li className="flex gap-3"><Phone size={16} className="mt-0.5 text-primary shrink-0" /> +971 4 000 0000</li>
-              <li className="flex gap-3"><Mail size={16} className="mt-0.5 text-primary shrink-0" /> info@prestigemotors.ae</li>
+              <li className="flex gap-3"><MapPin size={16} className="mt-0.5 text-primary shrink-0" /><span>Sheikh Zayed Road, Dubai, UAE</span></li>
+              <li className="flex gap-3"><Phone size={16} className="mt-0.5 text-primary shrink-0" /><span>+971 4 000 0000</span></li>
+              <li className="flex gap-3"><Mail size={16} className="mt-0.5 text-primary shrink-0" /><span>info@prestigemotors.ae</span></li>
             </ul>
           </div>
         </div>
