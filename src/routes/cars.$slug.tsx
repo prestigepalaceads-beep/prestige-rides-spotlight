@@ -132,7 +132,7 @@ function CarDetailPage() {
                   href={car.videoLink}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-3 px-8 py-4 border border-primary/50 text-primary text-xs tracking-[0.3em] uppercase font-medium hover:bg-primary/10 transition-all"
+                  className="inline-flex items-center gap-3 px-8 py-4 border border-primary/50 text-primary text-xs tracking-[0.3em] uppercase font-medium hover:bg-primary/10 transition-all rounded-full"
                 >
                   <Play size={14} /> Watch Video
                 </a>
