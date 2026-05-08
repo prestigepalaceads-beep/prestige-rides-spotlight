@@ -1,20 +1,27 @@
 import { Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import logo from "@/assets/logo.png";
+import logoLight from "@/assets/logo.png";
+import logoDark from "@/assets/logo-dark.png";
 import { ThemeToggle } from "@/components/ThemeToggle";
-
-const nav = [
-  { to: "/", label: "Home" },
-  { to: "/cars", label: "Cars" },
-  { to: "/services", label: "Services" },
-  { to: "/blogs", label: "Blogs" },
-  { to: "/contact", label: "Contact Us" },
-] as const;
+import { LanguageToggle } from "@/components/LanguageToggle";
+import { useTheme } from "@/hooks/use-theme";
+import { useLanguage } from "@/hooks/use-language";
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { theme } = useTheme();
+  const { t } = useLanguage();
+  const logo = theme === "dark" ? logoDark : logoLight;
+
+  const nav = [
+    { to: "/", label: t("nav.home") },
+    { to: "/cars", label: t("nav.cars") },
+    { to: "/services", label: t("nav.services") },
+    { to: "/blogs", label: t("nav.blogs") },
+    { to: "/contact", label: t("nav.contact") },
+  ] as const;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -33,8 +40,8 @@ export function SiteHeader() {
         <Link to="/" className="flex items-center gap-3">
           <img src={logo} alt="Prestige Motors" className="h-11 w-auto" />
           <div className="hidden sm:block leading-tight">
-            <div className="font-display text-xl tracking-widest text-foreground">PRESTIGE</div>
-            <div className="text-[10px] tracking-[0.4em] text-muted-foreground">MOTORS</div>
+            <div className="font-display text-xl tracking-widest text-foreground">{t("brand.name")}</div>
+            <div className="text-[10px] tracking-[0.4em] text-muted-foreground">{t("brand.sub")}</div>
           </div>
         </Link>
 
@@ -53,13 +60,15 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
+          <LanguageToggle />
           <ThemeToggle />
           <Link to="/contact" className="px-5 py-2.5 text-xs uppercase tracking-[0.25em] bg-gradient-gold text-primary-foreground font-medium hover:shadow-gold transition-all">
-            Visit Showroom
+            {t("nav.visitShowroom")}
           </Link>
         </div>
 
         <div className="flex lg:hidden items-center gap-2">
+          <LanguageToggle />
           <ThemeToggle />
           <button onClick={() => setOpen(!open)} className="text-foreground" aria-label="Menu">
             {open ? <X size={26} /> : <Menu size={26} />}
