@@ -4,7 +4,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { cars, brands, type CarStatus, type CarCategory } from "@/data/cars";
 import { SlidersHorizontal, X } from "lucide-react";
 
-export const Route = createFileRoute("/cars")({
+export const Route = createFileRoute("/cars/")({
   head: () => ({
     meta: [
       { title: "Cars — Prestige Motors" },
