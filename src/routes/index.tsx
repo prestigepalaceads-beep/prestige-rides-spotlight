@@ -127,9 +127,9 @@ function Index() {
                 transition={{ duration: 0.6, delay: i * 0.1 }}
                 className="group cursor-pointer"
               >
-                <div className="relative aspect-[4/3] overflow-hidden mb-6 border border-border">
+                <div className="relative aspect-[4/3] overflow-hidden mb-6 border border-border rounded-2xl">
                   <img src={b.img} alt={b.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.2s] group-hover:scale-105" />
-                  <div className="absolute top-4 left-4 px-3 py-1.5 bg-onyx/80 backdrop-blur text-[10px] tracking-[0.3em] uppercase text-primary border border-primary/30">
+                  <div className="absolute top-4 left-4 px-3 py-1.5 bg-onyx/80 backdrop-blur text-[10px] tracking-[0.3em] uppercase text-primary border border-primary/30 rounded-full">
                     {b.cat}
                   </div>
                 </div>

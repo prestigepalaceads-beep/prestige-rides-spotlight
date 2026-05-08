@@ -89,15 +89,15 @@ function CarDetailPage() {
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
-              className="relative aspect-[4/3] overflow-hidden border border-primary/30"
+              className="relative aspect-[4/3] overflow-hidden border border-primary/30 rounded-2xl"
             >
               <img src={car.img} alt={car.title} className="h-full w-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-onyx/70 via-transparent to-transparent" />
               <div className="absolute top-5 left-5 flex gap-2">
-                <span className="px-3 py-1.5 bg-onyx/80 backdrop-blur-md border border-primary/40 text-[10px] tracking-[0.3em] uppercase text-primary">
+                <span className="px-3 py-1.5 bg-onyx/80 backdrop-blur-md border border-primary/40 text-[10px] tracking-[0.3em] uppercase text-primary rounded-full">
                   {car.status}
                 </span>
-                <span className="px-3 py-1.5 bg-onyx/80 backdrop-blur-md border border-primary/40 text-[10px] tracking-[0.3em] uppercase text-primary">
+                <span className="px-3 py-1.5 bg-onyx/80 backdrop-blur-md border border-primary/40 text-[10px] tracking-[0.3em] uppercase text-primary rounded-full">
                   {car.category}
                 </span>
               </div>
@@ -132,7 +132,7 @@ function CarDetailPage() {
                   href={car.videoLink}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-3 px-8 py-4 border border-primary/50 text-primary text-xs tracking-[0.3em] uppercase font-medium hover:bg-primary/10 transition-all"
+                  className="inline-flex items-center gap-3 px-8 py-4 border border-primary/50 text-primary text-xs tracking-[0.3em] uppercase font-medium hover:bg-primary/10 transition-all rounded-full"
                 >
                   <Play size={14} /> Watch Video
                 </a>
@@ -149,7 +149,7 @@ function CarDetailPage() {
             <div className="h-px w-12 bg-primary" />
             <span className="text-xs tracking-[0.5em] uppercase text-primary">Specifications</span>
           </div>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-border">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden">
             {specs.map(({ Icon, label, value }) => (
               <div key={label} className="bg-background p-6">
                 <Icon size={20} className="text-primary mb-4" />
@@ -169,7 +169,7 @@ function CarDetailPage() {
               <div className="h-px w-12 bg-primary" />
               <span className="text-xs tracking-[0.5em] uppercase text-primary">Walkaround</span>
             </div>
-            <div className="relative aspect-video overflow-hidden border border-border">
+            <div className="relative aspect-video overflow-hidden border border-border rounded-2xl">
               <iframe
                 src={embed}
                 title={`${car.title} video`}
