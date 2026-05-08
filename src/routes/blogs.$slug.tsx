@@ -89,7 +89,7 @@ function BlogDetail() {
       {/* Body */}
       <section className="mx-auto max-w-[760px] px-6 lg:px-10 py-20 md:py-28">
         <div className="space-y-7 text-base md:text-lg leading-[1.85] text-foreground/85">
-          {post.body.map((paragraph, i) => (
+          {post.body.map((paragraph: string, i: number) => (
             <p key={i} className={i === 0 ? "first-letter:font-display first-letter:text-6xl first-letter:float-left first-letter:mr-3 first-letter:leading-none first-letter:text-primary" : ""}>
               {paragraph}
             </p>
