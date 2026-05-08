@@ -124,6 +124,15 @@
     -webkit-font-smoothing: antialiased;
   }
   h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.01em; }
+
+  /* Arabic: swap fonts and tighten tracking when html[lang="ar"] */
+  html[lang="ar"] body { font-family: var(--font-arabic); }
+  html[lang="ar"] h1,
+  html[lang="ar"] h2,
+  html[lang="ar"] h3,
+  html[lang="ar"] h4 { font-family: var(--font-arabic); letter-spacing: 0; }
+  html[lang="ar"] [class*="tracking-["] { letter-spacing: 0.05em !important; }
+  html[lang="ar"] .font-display { font-family: var(--font-arabic); }
 }
 
 @layer utilities {
