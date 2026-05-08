@@ -4,15 +4,8 @@ import { ArrowRight, Shield, Wrench, Sparkles, Award } from "lucide-react";
 import { HeroSlider } from "@/components/HeroSlider";
 import { CarSlider, type Car } from "@/components/CarSlider";
 import { SectionHeading } from "@/components/SectionHeading";
+import { cars as allCars } from "@/data/cars";
 
-import car1 from "@/assets/car-1.jpg";
-import car2 from "@/assets/car-2.jpg";
-import car3 from "@/assets/car-3.jpg";
-import car4 from "@/assets/car-4.jpg";
-import a1 from "@/assets/armoured-1.jpg";
-import a2 from "@/assets/armoured-2.jpg";
-import a3 from "@/assets/armoured-3.jpg";
-import a4 from "@/assets/armoured-4.jpg";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
@@ -22,19 +15,18 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const featured: Car[] = [
-  { img: car1, brand: "Rolls-Royce", model: "Cullinan Black Badge", year: "2024", price: "AED 1,890,000", spec: "V12 Twin-Turbo · 600 HP" },
-  { img: car2, brand: "Lamborghini", model: "Urus Performante", year: "2024", price: "AED 1,420,000", spec: "V8 Twin-Turbo · 657 HP" },
-  { img: car3, brand: "Ferrari", model: "812 Superfast", year: "2023", price: "AED 1,750,000", spec: "V12 NA · 789 HP" },
-  { img: car4, brand: "Bentley", model: "Continental GT Speed", year: "2024", price: "AED 1,180,000", spec: "W12 Twin-Turbo · 650 HP" },
-];
+const toCard = (c: typeof allCars[number]): Car => ({
+  slug: c.slug,
+  img: c.img,
+  brand: c.brand,
+  model: c.title.replace(`${c.brand} `, ""),
+  year: c.year,
+  price: c.priceLabel,
+  spec: c.spec,
+});
 
-const armoured: Car[] = [
-  { img: a1, brand: "Mercedes-Benz", model: "G 63 AMG Armoured B6", year: "2024", price: "AED 2,100,000", spec: "Ballistic B6 · V8 Biturbo" },
-  { img: a2, brand: "Range Rover", model: "Sentinel Autobiography", year: "2024", price: "AED 2,450,000", spec: "VR8 Certified · V8" },
-  { img: a3, brand: "Cadillac", model: "Escalade ESV Armoured", year: "2024", price: "AED 1,650,000", spec: "B6 Protection · V8" },
-  { img: a4, brand: "Toyota", model: "Land Cruiser 300 B6", year: "2024", price: "AED 980,000", spec: "Ballistic B6 · V6 TT" },
-];
+const featured: Car[] = allCars.filter((c) => c.category === "Normal").map(toCard);
+const armoured: Car[] = allCars.filter((c) => c.category === "Armoured").map(toCard);
 
 const blogs = [
   { img: blog1, cat: "Detailing", title: "The Art of the Showroom Finish", date: "May 02, 2026", excerpt: "How master detailers transform metal into mirrors — a study in obsession." },

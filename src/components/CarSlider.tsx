@@ -2,12 +2,14 @@ import useEmblaCarousel from "embla-carousel-react";
 import { useCallback, useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "@tanstack/react-router";
 
 export type Car = {
+  slug?: string;
   img: string;
   brand: string;
   model: string;
-  year: string;
+  year: string | number;
   price: string;
   spec: string;
 };
@@ -100,36 +102,42 @@ export function CarSlider({ eyebrow, title, description, cars }: Props) {
 }
 
 function CarCard({ car }: { car: Car }) {
+  const Wrapper: React.ElementType = car.slug ? Link : "div";
+  const wrapperProps = car.slug
+    ? { to: "/cars/$slug", params: { slug: car.slug } }
+    : {};
   return (
-    <article className="group relative bg-card border border-border overflow-hidden transition-all duration-500 hover:border-primary/60">
-      <div className="relative aspect-[4/3] overflow-hidden bg-onyx">
-        <img
-          src={car.img}
-          alt={`${car.brand} ${car.model}`}
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-[1.2s] group-hover:scale-105"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-onyx/80 via-transparent to-transparent" />
-        <div className="absolute top-5 left-5 px-3 py-1.5 bg-onyx/70 backdrop-blur-md border border-primary/30">
-          <span className="text-[10px] tracking-[0.3em] uppercase text-primary">{car.year}</span>
-        </div>
-      </div>
-
-      <div className="p-7">
-        <p className="text-xs tracking-[0.3em] uppercase text-primary mb-3">{car.brand}</p>
-        <h3 className="font-display text-2xl md:text-3xl font-medium leading-tight">{car.model}</h3>
-        <p className="mt-2 text-sm text-muted-foreground">{car.spec}</p>
-
-        <div className="mt-6 flex items-end justify-between border-t border-border pt-5">
-          <div>
-            <p className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground">Price</p>
-            <p className="font-display text-xl text-gradient-gold">{car.price}</p>
+    <Wrapper {...wrapperProps} className="block">
+      <article className="group relative bg-card border border-border overflow-hidden transition-all duration-500 hover:border-primary/60">
+        <div className="relative aspect-[4/3] overflow-hidden bg-onyx">
+          <img
+            src={car.img}
+            alt={`${car.brand} ${car.model}`}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-[1.2s] group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-onyx/80 via-transparent to-transparent" />
+          <div className="absolute top-5 left-5 px-3 py-1.5 bg-onyx/70 backdrop-blur-md border border-primary/30">
+            <span className="text-[10px] tracking-[0.3em] uppercase text-primary">{car.year}</span>
           </div>
-          <button className="text-xs tracking-[0.3em] uppercase text-foreground/80 hover:text-primary transition flex items-center gap-2">
-            Inquire <ArrowRight size={14} />
-          </button>
         </div>
-      </div>
-    </article>
+
+        <div className="p-7">
+          <p className="text-xs tracking-[0.3em] uppercase text-primary mb-3">{car.brand}</p>
+          <h3 className="font-display text-2xl md:text-3xl font-medium leading-tight">{car.model}</h3>
+          <p className="mt-2 text-sm text-muted-foreground">{car.spec}</p>
+
+          <div className="mt-6 flex items-end justify-between border-t border-border pt-5">
+            <div>
+              <p className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground">Price</p>
+              <p className="font-display text-xl text-gradient-gold">{car.price}</p>
+            </div>
+            <span className="text-xs tracking-[0.3em] uppercase text-foreground/80 group-hover:text-primary transition flex items-center gap-2">
+              View <ArrowRight size={14} />
+            </span>
+          </div>
+        </div>
+      </article>
+    </Wrapper>
   );
 }
