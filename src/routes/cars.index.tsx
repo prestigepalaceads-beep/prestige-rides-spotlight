@@ -215,7 +215,7 @@ function CarsPage() {
                   key={c.slug}
                   to="/cars/$slug"
                   params={{ slug: c.slug }}
-                  className="group bg-card border border-border overflow-hidden hover:border-primary/60 transition"
+                  className="group bg-card border border-border overflow-hidden rounded-2xl hover:border-primary/60 transition"
                 >
                   <div className="aspect-[4/3] overflow-hidden relative">
                     <img
