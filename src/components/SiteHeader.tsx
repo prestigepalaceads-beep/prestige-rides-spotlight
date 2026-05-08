@@ -37,12 +37,8 @@ export function SiteHeader() {
       }`}
     >
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4 lg:px-10">
-        <Link to="/" className="flex items-center gap-3">
+        <Link to="/" className="flex items-center">
           <img src={logo} alt="Prestige Motors" className="h-11 w-auto" />
-          <div className="hidden sm:block leading-tight">
-            <div className="font-display text-xl tracking-widest text-foreground">{t("brand.name")}</div>
-            <div className="text-[10px] tracking-[0.4em] text-muted-foreground">{t("brand.sub")}</div>
-          </div>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-10">
