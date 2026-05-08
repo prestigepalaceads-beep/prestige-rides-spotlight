@@ -66,7 +66,7 @@ export function HeroSlider() {
                 <div className="h-px w-12 bg-primary" />
                 <span className="text-xs tracking-[0.5em] uppercase text-primary">{slides[index].eyebrow}</span>
               </div>
-              <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-medium leading-[1.02] text-foreground">
+              <h1 className="font-display text-5xl md:text-6xl font-semibold leading-[1.02] text-foreground">
                 {slides[index].title}
               </h1>
               <p className="mt-8 text-base md:text-lg text-foreground/75 max-w-xl leading-relaxed">
