@@ -17,8 +17,18 @@ const slideKeys = [
 ] as const satisfies ReadonlyArray<{ img: string; eyebrow: TranslationKey; title: TranslationKey; sub: TranslationKey; cta: TranslationKey; to: string }>;
 
 export function HeroSlider() {
+  const { t } = useLanguage();
   const [emblaRef, embla] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 6000, stopOnInteraction: false })]);
   const [index, setIndex] = useState(0);
+
+  const slides = slideKeys.map((s) => ({
+    img: s.img,
+    eyebrow: t(s.eyebrow),
+    title: t(s.title),
+    sub: t(s.sub),
+    cta: t(s.cta),
+    to: s.to,
+  }));
 
   useEffect(() => {
     if (!embla) return;
@@ -65,7 +75,7 @@ export function HeroSlider() {
               <div className="mt-10 flex gap-4 items-center">
                 <Link to={slides[index].to} className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-gold text-primary-foreground text-xs tracking-[0.3em] uppercase font-medium hover:shadow-gold transition-all">
                   {slides[index].cta}
-                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1 rtl:-scale-x-100" />
                 </Link>
               </div>
             </motion.div>
@@ -88,7 +98,7 @@ export function HeroSlider() {
       </div>
 
       {/* Counter */}
-      <div className="absolute bottom-10 right-10 hidden md:flex items-center gap-3 text-xs tracking-[0.3em] text-foreground/60">
+      <div className="absolute bottom-10 right-10 hidden md:flex items-center gap-3 text-xs tracking-[0.3em] text-foreground/60" dir="ltr">
         <span className="text-primary">{String(index + 1).padStart(2, "0")}</span>
         <span className="h-px w-8 bg-foreground/30" />
         <span>{String(slides.length).padStart(2, "0")}</span>
