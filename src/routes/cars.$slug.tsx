@@ -149,7 +149,7 @@ function CarDetailPage() {
             <div className="h-px w-12 bg-primary" />
             <span className="text-xs tracking-[0.5em] uppercase text-primary">Specifications</span>
           </div>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-border">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden">
             {specs.map(({ Icon, label, value }) => (
               <div key={label} className="bg-background p-6">
                 <Icon size={20} className="text-primary mb-4" />
