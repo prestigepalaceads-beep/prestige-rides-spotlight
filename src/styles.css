@@ -81,6 +81,38 @@
   --shadow-elegant: 0 30px 80px -30px oklch(0 0 0 / 0.8);
 }
 
+.light {
+  --background: oklch(0.99 0.002 90);
+  --foreground: oklch(0.15 0.008 90);
+
+  --card: oklch(0.97 0.003 90);
+  --card-foreground: oklch(0.15 0.008 90);
+  --popover: oklch(0.99 0.002 90);
+  --popover-foreground: oklch(0.15 0.008 90);
+
+  --primary: oklch(0.55 0.22 25);
+  --primary-foreground: oklch(0.99 0.002 90);
+
+  --secondary: oklch(0.94 0.004 90);
+  --secondary-foreground: oklch(0.15 0.008 90);
+
+  --muted: oklch(0.94 0.004 90);
+  --muted-foreground: oklch(0.45 0.012 85);
+
+  --accent: oklch(0.55 0.22 25);
+  --accent-foreground: oklch(0.99 0.002 90);
+
+  --border: oklch(0.15 0.008 90 / 0.14);
+  --input: oklch(0.88 0.005 85);
+  --ring: oklch(0.55 0.22 25);
+
+  /* Remap onyx surface utility to a light tone in light mode */
+  --onyx: oklch(0.96 0.003 90);
+
+  --gradient-radial-gold: radial-gradient(ellipse at center, oklch(0.55 0.22 25 / 0.12), transparent 70%);
+  --shadow-elegant: 0 30px 80px -30px oklch(0.15 0.008 90 / 0.18);
+}
+
 @layer base {
   * { border-color: var(--color-border); }
   html { scroll-behavior: smooth; }

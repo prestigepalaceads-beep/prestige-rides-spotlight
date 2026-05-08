@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -52,14 +53,18 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
+          <ThemeToggle />
           <Link to="/contact" className="px-5 py-2.5 text-xs uppercase tracking-[0.25em] bg-gradient-gold text-primary-foreground font-medium hover:shadow-gold transition-all">
             Visit Showroom
           </Link>
         </div>
 
-        <button onClick={() => setOpen(!open)} className="lg:hidden text-foreground" aria-label="Menu">
-          {open ? <X size={26} /> : <Menu size={26} />}
-        </button>
+        <div className="flex lg:hidden items-center gap-2">
+          <ThemeToggle />
+          <button onClick={() => setOpen(!open)} className="text-foreground" aria-label="Menu">
+            {open ? <X size={26} /> : <Menu size={26} />}
+          </button>
+        </div>
       </div>
 
       {open && (
