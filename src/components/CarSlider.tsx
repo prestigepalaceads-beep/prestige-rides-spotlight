@@ -2,12 +2,14 @@ import useEmblaCarousel from "embla-carousel-react";
 import { useCallback, useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "@tanstack/react-router";
 
 export type Car = {
+  slug?: string;
   img: string;
   brand: string;
   model: string;
-  year: string;
+  year: string | number;
   price: string;
   spec: string;
 };
