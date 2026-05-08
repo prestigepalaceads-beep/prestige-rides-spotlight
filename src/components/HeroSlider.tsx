@@ -7,12 +7,14 @@ import { Link } from "@tanstack/react-router";
 import b1 from "@/assets/banner-1.jpg";
 import b2 from "@/assets/banner-2.jpg";
 import b3 from "@/assets/banner-3.jpg";
+import { useLanguage } from "@/hooks/use-language";
+import type { TranslationKey } from "@/lib/i18n";
 
-const slides = [
-  { img: b1, eyebrow: "The Collection", title: "Where Legends Are Curated", sub: "An assembly of the world's most coveted automobiles, chosen with uncompromising precision.", cta: "Browse Vehicles", to: "/cars" },
-  { img: b2, eyebrow: "Armoured Series", title: "Luxury Beyond Protection", sub: "Tactical sophistication engineered for those who never compromise on safety or style.", cta: "Discover Armoured", to: "/cars" },
-  { img: b3, eyebrow: "Performance", title: "The Art of Acceleration", sub: "Hand-selected supercars built for the road less traveled — and the moments worth remembering.", cta: "Explore Performance", to: "/cars" },
-] as const;
+const slideKeys = [
+  { img: b1, eyebrow: "hero.s1.eyebrow", title: "hero.s1.title", sub: "hero.s1.sub", cta: "hero.s1.cta", to: "/cars" },
+  { img: b2, eyebrow: "hero.s2.eyebrow", title: "hero.s2.title", sub: "hero.s2.sub", cta: "hero.s2.cta", to: "/cars" },
+  { img: b3, eyebrow: "hero.s3.eyebrow", title: "hero.s3.title", sub: "hero.s3.sub", cta: "hero.s3.cta", to: "/cars" },
+] as const satisfies ReadonlyArray<{ img: string; eyebrow: TranslationKey; title: TranslationKey; sub: TranslationKey; cta: TranslationKey; to: string }>;
 
 export function HeroSlider() {
   const [emblaRef, embla] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 6000, stopOnInteraction: false })]);
