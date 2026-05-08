@@ -26,11 +26,7 @@ const toCard = (c: typeof allCars[number]): Car => ({
 const featured: Car[] = allCars.filter((c) => c.category === "Normal").map(toCard);
 const armoured: Car[] = allCars.filter((c) => c.category === "Armoured").map(toCard);
 
-const blogs = [
-  { img: blog1, cat: "Detailing", title: "The Art of the Showroom Finish", date: "May 02, 2026", excerpt: "How master detailers transform metal into mirrors — a study in obsession." },
-  { img: blog2, cat: "Ownership", title: "Beyond the Key: A Buyer's Ritual", date: "Apr 21, 2026", excerpt: "Acquiring a flagship is never transactional. It's an inheritance of craft." },
-  { img: blog3, cat: "Service", title: "Mechanical Poetry", date: "Apr 09, 2026", excerpt: "Inside the workshop where every torque setting is whispered, never barked." },
-];
+const blogs = blogPosts.slice(0, 3);
 
 function Index() {
   return (
