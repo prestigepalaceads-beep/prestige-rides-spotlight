@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const nav = [
   { to: "/", label: "Home" },
