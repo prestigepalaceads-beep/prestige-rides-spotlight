@@ -196,7 +196,7 @@ function CarDetailPage() {
                   key={c.slug}
                   to="/cars/$slug"
                   params={{ slug: c.slug }}
-                  className="group bg-card border border-border overflow-hidden hover:border-primary/60 transition"
+                  className="group bg-card border border-border overflow-hidden rounded-2xl hover:border-primary/60 transition"
                 >
                   <div className="aspect-[4/3] overflow-hidden">
                     <img src={c.img} alt={c.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-1000" />
