@@ -6,9 +6,7 @@ import { CarSlider, type Car } from "@/components/CarSlider";
 import { SectionHeading } from "@/components/SectionHeading";
 import { cars as allCars } from "@/data/cars";
 
-import blog1 from "@/assets/blog-1.jpg";
-import blog2 from "@/assets/blog-2.jpg";
-import blog3 from "@/assets/blog-3.jpg";
+import { blogPosts } from "@/data/blogs";
 import about from "@/assets/about.jpg";
 
 export const Route = createFileRoute("/")({
