@@ -30,7 +30,7 @@ export function SiteHeader() {
     >
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4 lg:px-10">
         <Link to="/" className="flex items-center gap-3">
-          <img src={logo} alt="Prestige Motors" className="h-12 w-auto invert brightness-0 contrast-200" style={{ filter: "invert(82%) sepia(35%) saturate(640%) hue-rotate(2deg) brightness(95%)" }} />
+          <img src={logo} alt="Prestige Motors" className="h-11 w-auto" style={{ filter: "invert(82%) sepia(35%) saturate(640%) hue-rotate(2deg) brightness(95%)" }} />
           <div className="hidden sm:block leading-tight">
             <div className="font-display text-xl tracking-widest text-gradient-gold">PRESTIGE</div>
             <div className="text-[10px] tracking-[0.4em] text-muted-foreground">MOTORS</div>
