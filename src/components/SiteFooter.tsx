@@ -7,7 +7,7 @@ export function SiteFooter() {
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10 py-20">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <div className="font-display text-2xl tracking-widest text-gradient-gold">PRESTIGE</div>
+            <div className="font-display text-2xl tracking-widest text-foreground">PRESTIGE</div>
             <div className="text-[10px] tracking-[0.4em] text-muted-foreground mb-6">MOTORS</div>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Curators of the world's most exceptional automobiles. Crafting confidence on every road.
