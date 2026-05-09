@@ -137,7 +137,7 @@ function CarDetailPage() {
                     <button
                       key={i}
                       onClick={() => setLightbox(i)}
-                      className="group relative aspect-[4/3] overflow-hidden rounded-md border border-border hover:border-primary/60 transition"
+                      className="group relative aspect-[4/3] overflow-hidden rounded-xl border border-border hover:border-primary/60 transition"
                       aria-label={`Open photo ${i + 1}`}
                     >
                       <img
@@ -265,7 +265,7 @@ function CarDetailPage() {
               <div className="h-px w-12 bg-primary" />
               <span className="text-xs tracking-[0.5em] uppercase text-primary">Walkaround</span>
             </div>
-            <div className="relative aspect-video overflow-hidden border border-border rounded-2xl">
+            <div className="relative h-[300px] overflow-hidden border border-border rounded-2xl">
               <iframe
                 src={embed}
                 title={`${car.title} video`}
