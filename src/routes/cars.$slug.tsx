@@ -1,5 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useCallback } from "react";
+import { X } from "lucide-react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -54,6 +56,30 @@ function getYouTubeEmbed(url: string): string | null {
 function CarDetailPage() {
   const car = Route.useLoaderData();
   const embed = getYouTubeEmbed(car.videoLink);
+
+  const photos = Array.from(new Set([car.img, ...(car.gallery ?? [])]));
+  const [lightbox, setLightbox] = useState<number | null>(null);
+
+  const close = useCallback(() => setLightbox(null), []);
+  const next = useCallback(
+    () => setLightbox((i) => (i === null ? null : (i + 1) % photos.length)),
+    [photos.length]
+  );
+  const prev = useCallback(
+    () => setLightbox((i) => (i === null ? null : (i - 1 + photos.length) % photos.length)),
+    [photos.length]
+  );
+
+  useEffect(() => {
+    if (lightbox === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") prev();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightbox, close, next, prev]);
 
   const specs = [
     { Icon: CarIcon, label: "Brand", value: car.brand },
@@ -160,6 +186,83 @@ function CarDetailPage() {
           </div>
         </div>
       </section>
+
+      {/* Photo Album */}
+      {photos.length > 1 && (
+        <section className="pb-20 md:pb-28 bg-background">
+          <div className="mx-auto max-w-[1500px] px-6 lg:px-10">
+            <div className="flex items-center gap-4 mb-10">
+              <div className="h-px w-12 bg-primary" />
+              <span className="text-xs tracking-[0.5em] uppercase text-primary">Photo Album</span>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+              {photos.map((src, i) => (
+                <button
+                  key={i}
+                  onClick={() => setLightbox(i)}
+                  className="group relative aspect-[4/3] overflow-hidden rounded-xl border border-border hover:border-primary/60 transition"
+                  aria-label={`Open photo ${i + 1}`}
+                >
+                  <img
+                    src={src}
+                    alt={`${car.title} photo ${i + 1}`}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-onyx/0 group-hover:bg-onyx/30 transition" />
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <AnimatePresence>
+        {lightbox !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-onyx/95 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={close}
+          >
+            <button
+              onClick={close}
+              className="absolute top-6 right-6 h-12 w-12 flex items-center justify-center border border-primary/40 text-primary hover:bg-primary/10 rounded-full transition"
+              aria-label="Close"
+            >
+              <X size={20} />
+            </button>
+            <button
+              onClick={(e) => { e.stopPropagation(); prev(); }}
+              className="absolute left-4 md:left-8 h-12 w-12 flex items-center justify-center border border-primary/40 text-primary hover:bg-primary/10 rounded-full transition"
+              aria-label="Previous photo"
+            >
+              <ArrowLeft size={20} />
+            </button>
+            <button
+              onClick={(e) => { e.stopPropagation(); next(); }}
+              className="absolute right-4 md:right-8 h-12 w-12 flex items-center justify-center border border-primary/40 text-primary hover:bg-primary/10 rounded-full transition"
+              aria-label="Next photo"
+            >
+              <ArrowRight size={20} />
+            </button>
+            <motion.img
+              key={lightbox}
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}
+              src={photos[lightbox]}
+              alt={`${car.title} photo ${lightbox + 1}`}
+              onClick={(e) => e.stopPropagation()}
+              className="max-h-[88vh] max-w-[92vw] object-contain rounded-xl border border-primary/30"
+            />
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 bg-onyx/70 border border-primary/30 rounded-full text-[10px] tracking-[0.3em] uppercase text-primary">
+              {lightbox + 1} / {photos.length}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Video */}
       {embed && (

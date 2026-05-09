@@ -14,6 +14,7 @@ export type DistanceUnit = "Km" | "Mile";
 export interface CarDetail {
   slug: string;
   img: string;
+  gallery?: string[];
   title: string;
   description: string;
   brand: string;
@@ -40,6 +41,7 @@ export const cars: CarDetail[] = [
   {
     slug: "rolls-royce-cullinan-black-badge-2024",
     img: car1,
+    gallery: [car1, car2, car4, car3],
     title: "Rolls-Royce Cullinan Black Badge",
     description:
       "The darker, more assertive side of Rolls-Royce. The Cullinan Black Badge merges presence with performance — sculpted from carbon-fibre composites, finished in obsidian black, and tuned for the discerning driver who refuses convention.",
@@ -65,6 +67,7 @@ export const cars: CarDetail[] = [
   {
     slug: "lamborghini-urus-performante-2024",
     img: car2,
+    gallery: [car2, car3, car1, car4],
     title: "Lamborghini Urus Performante",
     description:
       "Track-bred SUV silhouette, race-honed dynamics. The Urus Performante channels Lamborghini's motorsport DNA into the most aggressive Super-SUV ever produced — lighter, louder, and unapologetically Italian.",
@@ -90,6 +93,7 @@ export const cars: CarDetail[] = [
   {
     slug: "ferrari-812-superfast-2023",
     img: car3,
+    gallery: [car3, car4, car2, car1],
     title: "Ferrari 812 Superfast",
     description:
       "The pinnacle of front-engined Ferrari engineering. A naturally aspirated V12 in its purest, most savage expression — 789 horsepower of unfiltered Maranello.",
@@ -115,6 +119,7 @@ export const cars: CarDetail[] = [
   {
     slug: "bentley-continental-gt-speed-2024",
     img: car4,
+    gallery: [car4, car1, car3, car2],
     title: "Bentley Continental GT Speed",
     description:
       "British grand touring perfected. The Continental GT Speed is a sculpted alliance of artisan luxury and effortless 650-horsepower W12 power.",
@@ -140,6 +145,7 @@ export const cars: CarDetail[] = [
   {
     slug: "mercedes-g63-amg-armoured-b6-2024",
     img: a1,
+    gallery: [a1, a2, a3, a4],
     title: "Mercedes-Benz G 63 AMG Armoured B6",
     description:
       "Military-grade ballistic protection wrapped in AMG's most iconic silhouette. Certified B6 — discreet, indestructible, and effortlessly luxurious.",
@@ -165,6 +171,7 @@ export const cars: CarDetail[] = [
   {
     slug: "range-rover-sentinel-autobiography-2024",
     img: a2,
+    gallery: [a2, a3, a4, a1],
     title: "Range Rover Sentinel Autobiography",
     description:
       "Hand-built by Land Rover Special Vehicle Operations. VR8-certified armouring engineered to be invisible — preserving the Range Rover's signature elegance.",
@@ -190,6 +197,7 @@ export const cars: CarDetail[] = [
   {
     slug: "cadillac-escalade-esv-armoured-2024",
     img: a3,
+    gallery: [a3, a4, a1, a2],
     title: "Cadillac Escalade ESV Armoured",
     description:
       "American executive presence with B6 certified ballistic protection. The Escalade ESV redefines the executive transport with discreet armouring and signature comfort.",
@@ -215,6 +223,7 @@ export const cars: CarDetail[] = [
   {
     slug: "toyota-land-cruiser-300-b6-2024",
     img: a4,
+    gallery: [a4, a1, a2, a3],
     title: "Toyota Land Cruiser 300 B6",
     description:
       "Legendary Land Cruiser dependability fortified with B6 ballistic armouring. The first choice of diplomats, executives, and adventurers operating where reliability is non-negotiable.",
