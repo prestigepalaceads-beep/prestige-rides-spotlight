@@ -191,35 +191,8 @@ function CarDetailPage() {
         </div>
       </section>
 
-      {/* Photo Album */}
-      {photos.length > 1 && (
-        <section className="py-20 md:py-28 bg-background">
-          <div className="mx-auto max-w-[1500px] px-6 lg:px-10">
-            <div className="flex items-center gap-4 mb-10">
-              <div className="h-px w-12 bg-primary" />
-              <span className="text-xs tracking-[0.5em] uppercase text-primary">Photo Album</span>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-              {photos.map((src, i) => (
-                <button
-                  key={i}
-                  onClick={() => setLightbox(i)}
-                  className="group relative aspect-[4/3] overflow-hidden rounded-xl border border-border hover:border-primary/60 transition"
-                  aria-label={`Open photo ${i + 1}`}
-                >
-                  <img
-                    src={src}
-                    alt={`${car.title} photo ${i + 1}`}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-onyx/0 group-hover:bg-onyx/30 transition" />
-                </button>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      {/* Specifications */}
+      <section className="py-20 md:py-28 bg-background">
 
       {/* Specifications */}
       <section className="pb-20 md:pb-28 bg-background">
