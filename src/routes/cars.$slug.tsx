@@ -193,9 +193,6 @@ function CarDetailPage() {
 
       {/* Specifications */}
       <section className="py-20 md:py-28 bg-background">
-
-      {/* Specifications */}
-      <section className="pb-20 md:pb-28 bg-background">
         <div className="mx-auto max-w-[1500px] px-6 lg:px-10">
           <div className="flex items-center gap-4 mb-12">
             <div className="h-px w-12 bg-primary" />
