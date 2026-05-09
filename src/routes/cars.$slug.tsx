@@ -111,23 +111,46 @@ function CarDetailPage() {
           </Link>
 
           <div className="grid lg:grid-cols-[1.3fr_1fr] gap-10 lg:gap-16 items-start">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
-              className="relative aspect-[4/3] overflow-hidden border border-primary/30 rounded-2xl"
-            >
-              <img src={car.img} alt={car.title} className="h-full w-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-onyx/70 via-transparent to-transparent" />
-              <div className="absolute top-5 left-5 flex gap-2">
-                <span className="px-3 py-1.5 bg-onyx/80 backdrop-blur-md border border-primary/40 text-[10px] tracking-[0.3em] uppercase text-primary rounded-full">
-                  {car.status}
-                </span>
-                <span className="px-3 py-1.5 bg-onyx/80 backdrop-blur-md border border-primary/40 text-[10px] tracking-[0.3em] uppercase text-primary rounded-full">
-                  {car.category}
-                </span>
-              </div>
-            </motion.div>
+            <div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8 }}
+                className="relative aspect-[4/3] overflow-hidden border border-primary/30 rounded-2xl cursor-zoom-in"
+                onClick={() => setLightbox(0)}
+              >
+                <img src={car.img} alt={car.title} className="h-full w-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-onyx/70 via-transparent to-transparent" />
+                <div className="absolute top-5 left-5 flex gap-2">
+                  <span className="px-3 py-1.5 bg-onyx/80 backdrop-blur-md border border-primary/40 text-[10px] tracking-[0.3em] uppercase text-primary rounded-full">
+                    {car.status}
+                  </span>
+                  <span className="px-3 py-1.5 bg-onyx/80 backdrop-blur-md border border-primary/40 text-[10px] tracking-[0.3em] uppercase text-primary rounded-full">
+                    {car.category}
+                  </span>
+                </div>
+              </motion.div>
+
+              {photos.length > 1 && (
+                <div className="mt-3 grid grid-cols-5 gap-2">
+                  {photos.slice(0, 5).map((src, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setLightbox(i)}
+                      className="group relative aspect-[4/3] overflow-hidden rounded-md border border-border hover:border-primary/60 transition"
+                      aria-label={`Open photo ${i + 1}`}
+                    >
+                      <img
+                        src={src}
+                        alt={`${car.title} thumbnail ${i + 1}`}
+                        loading="lazy"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
 
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -168,38 +191,8 @@ function CarDetailPage() {
         </div>
       </section>
 
-      {/* Photo Album */}
-      {photos.length > 1 && (
-        <section className="py-20 md:py-28 bg-background">
-          <div className="mx-auto max-w-[1500px] px-6 lg:px-10">
-            <div className="flex items-center gap-4 mb-10">
-              <div className="h-px w-12 bg-primary" />
-              <span className="text-xs tracking-[0.5em] uppercase text-primary">Photo Album</span>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-              {photos.map((src, i) => (
-                <button
-                  key={i}
-                  onClick={() => setLightbox(i)}
-                  className="group relative aspect-[4/3] overflow-hidden rounded-xl border border-border hover:border-primary/60 transition"
-                  aria-label={`Open photo ${i + 1}`}
-                >
-                  <img
-                    src={src}
-                    alt={`${car.title} photo ${i + 1}`}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-onyx/0 group-hover:bg-onyx/30 transition" />
-                </button>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* Specifications */}
-      <section className="pb-20 md:pb-28 bg-background">
+      <section className="py-20 md:py-28 bg-background">
         <div className="mx-auto max-w-[1500px] px-6 lg:px-10">
           <div className="flex items-center gap-4 mb-12">
             <div className="h-px w-12 bg-primary" />
