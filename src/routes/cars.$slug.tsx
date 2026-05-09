@@ -57,6 +57,30 @@ function CarDetailPage() {
   const car = Route.useLoaderData();
   const embed = getYouTubeEmbed(car.videoLink);
 
+  const photos = Array.from(new Set([car.img, ...(car.gallery ?? [])]));
+  const [lightbox, setLightbox] = useState<number | null>(null);
+
+  const close = useCallback(() => setLightbox(null), []);
+  const next = useCallback(
+    () => setLightbox((i) => (i === null ? null : (i + 1) % photos.length)),
+    [photos.length]
+  );
+  const prev = useCallback(
+    () => setLightbox((i) => (i === null ? null : (i - 1 + photos.length) % photos.length)),
+    [photos.length]
+  );
+
+  useEffect(() => {
+    if (lightbox === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") prev();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightbox, close, next, prev]);
+
   const specs = [
     { Icon: CarIcon, label: "Brand", value: car.brand },
     { Icon: Calendar, label: "Year", value: String(car.year) },
