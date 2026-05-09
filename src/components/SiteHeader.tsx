@@ -4,25 +4,22 @@ import { Menu, X } from "lucide-react";
 import logoLight from "@/assets/logo-light.png";
 import logoDark from "@/assets/logo-dark.png";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { LanguageToggle } from "@/components/LanguageToggle";
 import { useTheme } from "@/hooks/use-theme";
-import { useLanguage } from "@/hooks/use-language";
+
+const nav = [
+  { to: "/", label: "Home" },
+  { to: "/cars", label: "Cars" },
+  { to: "/services", label: "Services" },
+  { to: "/blogs", label: "Blogs" },
+  { to: "/about", label: "About Us" },
+  { to: "/contact", label: "Contact Us" },
+] as const;
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { theme } = useTheme();
-  const { t } = useLanguage();
   const logo = theme === "dark" ? logoDark : logoLight;
-
-  const nav = [
-    { to: "/", label: t("nav.home") },
-    { to: "/cars", label: t("nav.cars") },
-    { to: "/services", label: t("nav.services") },
-    { to: "/blogs", label: t("nav.blogs") },
-    { to: "/about", label: t("nav.about") },
-    { to: "/contact", label: t("nav.contact") },
-  ] as const;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -57,15 +54,13 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
-          <LanguageToggle />
           <ThemeToggle />
           <Link to="/contact" className="px-5 py-2.5 text-xs uppercase tracking-[0.25em] bg-gradient-gold text-primary-foreground font-medium hover:shadow-gold transition-all">
-            {t("nav.visitShowroom")}
+            Visit Showroom
           </Link>
         </div>
 
         <div className="flex lg:hidden items-center gap-2">
-          <LanguageToggle />
           <ThemeToggle />
           <button onClick={() => setOpen(!open)} className="text-foreground" aria-label="Menu">
             {open ? <X size={26} /> : <Menu size={26} />}

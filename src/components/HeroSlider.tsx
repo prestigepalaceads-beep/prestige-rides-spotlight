@@ -7,28 +7,37 @@ import { Link } from "@tanstack/react-router";
 import b1 from "@/assets/banner-1.jpg";
 import b2 from "@/assets/banner-2.jpg";
 import b3 from "@/assets/banner-3.jpg";
-import { useLanguage } from "@/hooks/use-language";
-import type { TranslationKey } from "@/lib/i18n";
 
-const slideKeys = [
-  { img: b1, eyebrow: "hero.s1.eyebrow", title: "hero.s1.title", sub: "hero.s1.sub", cta: "hero.s1.cta", to: "/cars" },
-  { img: b2, eyebrow: "hero.s2.eyebrow", title: "hero.s2.title", sub: "hero.s2.sub", cta: "hero.s2.cta", to: "/cars" },
-  { img: b3, eyebrow: "hero.s3.eyebrow", title: "hero.s3.title", sub: "hero.s3.sub", cta: "hero.s3.cta", to: "/cars" },
-] as const satisfies ReadonlyArray<{ img: string; eyebrow: TranslationKey; title: TranslationKey; sub: TranslationKey; cta: TranslationKey; to: string }>;
+const slides = [
+  {
+    img: b1,
+    eyebrow: "The Collection",
+    title: "Where Legends Are Curated",
+    sub: "An assembly of the world's most coveted automobiles, chosen with uncompromising precision.",
+    cta: "Browse Vehicles",
+    to: "/cars",
+  },
+  {
+    img: b2,
+    eyebrow: "Armoured Series",
+    title: "Luxury Beyond Protection",
+    sub: "Tactical sophistication engineered for those who never compromise on safety or style.",
+    cta: "Discover Armoured",
+    to: "/cars",
+  },
+  {
+    img: b3,
+    eyebrow: "Performance",
+    title: "The Art of Acceleration",
+    sub: "Hand-selected supercars built for the road less traveled — and the moments worth remembering.",
+    cta: "Explore Performance",
+    to: "/cars",
+  },
+] as const;
 
 export function HeroSlider() {
-  const { t } = useLanguage();
   const [emblaRef, embla] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 6000, stopOnInteraction: false })]);
   const [index, setIndex] = useState(0);
-
-  const slides = slideKeys.map((s) => ({
-    img: s.img,
-    eyebrow: t(s.eyebrow),
-    title: t(s.title),
-    sub: t(s.sub),
-    cta: t(s.cta),
-    to: s.to,
-  }));
 
   useEffect(() => {
     if (!embla) return;
@@ -75,7 +84,7 @@ export function HeroSlider() {
               <div className="mt-10 flex gap-4 items-center">
                 <Link to={slides[index].to} className="pointer-events-auto group inline-flex items-center gap-3 px-8 py-4 bg-gradient-gold text-primary-foreground text-xs tracking-[0.3em] uppercase font-medium hover:shadow-gold transition-all">
                   {slides[index].cta}
-                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1 rtl:-scale-x-100" />
+                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
             </motion.div>
@@ -98,7 +107,7 @@ export function HeroSlider() {
       </div>
 
       {/* Counter */}
-      <div className="absolute bottom-10 right-10 hidden md:flex items-center gap-3 text-xs tracking-[0.3em] text-foreground/60" dir="ltr">
+      <div className="absolute bottom-10 right-10 hidden md:flex items-center gap-3 text-xs tracking-[0.3em] text-foreground/60">
         <span className="text-primary">{String(index + 1).padStart(2, "0")}</span>
         <span className="h-px w-8 bg-foreground/30" />
         <span>{String(slides.length).padStart(2, "0")}</span>
