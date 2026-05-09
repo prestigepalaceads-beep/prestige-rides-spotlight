@@ -14,6 +14,7 @@ export type DistanceUnit = "Km" | "Mile";
 export interface CarDetail {
   slug: string;
   img: string;
+  gallery?: string[];
   title: string;
   description: string;
   brand: string;
