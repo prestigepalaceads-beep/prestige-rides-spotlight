@@ -168,28 +168,9 @@ function CarDetailPage() {
         </div>
       </section>
 
-      {/* Specifications */}
-      <section className="py-20 md:py-28 bg-background">
-        <div className="mx-auto max-w-[1500px] px-6 lg:px-10">
-          <div className="flex items-center gap-4 mb-12">
-            <div className="h-px w-12 bg-primary" />
-            <span className="text-xs tracking-[0.5em] uppercase text-primary">Specifications</span>
-          </div>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden">
-            {specs.map(({ Icon, label, value }) => (
-              <div key={label} className="bg-background p-6">
-                <Icon size={20} className="text-primary mb-4" />
-                <p className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground">{label}</p>
-                <p className="font-display text-xl mt-2">{value}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Photo Album */}
       {photos.length > 1 && (
-        <section className="pb-20 md:pb-28 bg-background">
+        <section className="py-20 md:py-28 bg-background">
           <div className="mx-auto max-w-[1500px] px-6 lg:px-10">
             <div className="flex items-center gap-4 mb-10">
               <div className="h-px w-12 bg-primary" />
@@ -216,6 +197,25 @@ function CarDetailPage() {
           </div>
         </section>
       )}
+
+      {/* Specifications */}
+      <section className="pb-20 md:pb-28 bg-background">
+        <div className="mx-auto max-w-[1500px] px-6 lg:px-10">
+          <div className="flex items-center gap-4 mb-12">
+            <div className="h-px w-12 bg-primary" />
+            <span className="text-xs tracking-[0.5em] uppercase text-primary">Specifications</span>
+          </div>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden">
+            {specs.map(({ Icon, label, value }) => (
+              <div key={label} className="bg-background p-6">
+                <Icon size={20} className="text-primary mb-4" />
+                <p className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground">{label}</p>
+                <p className="font-display text-xl mt-2">{value}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <AnimatePresence>
         {lightbox !== null && (
