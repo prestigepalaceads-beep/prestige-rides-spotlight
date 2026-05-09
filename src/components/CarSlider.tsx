@@ -107,9 +107,9 @@ function CarCard({ car }: { car: Car }) {
     ? { to: "/cars/$slug", params: { slug: car.slug } }
     : {};
   return (
-    <Wrapper {...wrapperProps} className="block">
-      <article className="group relative bg-card border border-border overflow-hidden rounded-2xl transition-all duration-500 hover:border-primary/60">
-        <div className="relative aspect-[4/3] overflow-hidden bg-onyx">
+    <Wrapper {...wrapperProps} className="block [perspective:1200px]">
+      <article className="group relative bg-card border border-border overflow-hidden rounded-2xl transition-all duration-500 ease-out hover:border-primary/60 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.5)] hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] [transform-style:preserve-3d] [transform:rotateX(6deg)_rotateY(-10deg)] hover:[transform:rotateX(2deg)_rotateY(-3deg)_translateY(-6px)]">
+        <div className="relative aspect-[4/3] overflow-hidden bg-onyx [transform:translateZ(40px)]">
           <img
             src={car.img}
             alt={`${car.brand} ${car.model}`}
