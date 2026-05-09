@@ -265,7 +265,7 @@ function CarDetailPage() {
               <div className="h-px w-12 bg-primary" />
               <span className="text-xs tracking-[0.5em] uppercase text-primary">Walkaround</span>
             </div>
-            <div className="relative h-[300px] overflow-hidden border border-border rounded-2xl">
+            <div className="relative h-[500px] overflow-hidden border border-border rounded-2xl">
               <iframe
                 src={embed}
                 title={`${car.title} video`}
