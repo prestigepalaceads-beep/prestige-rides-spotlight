@@ -7,7 +7,6 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { cars as allCars } from "@/data/cars";
 import { blogPosts } from "@/data/blogs";
 import about from "@/assets/about.jpg";
-import { useLanguage } from "@/hooks/use-language";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -28,16 +27,15 @@ const armoured: Car[] = allCars.filter((c) => c.category === "Armoured").map(toC
 const blogs = blogPosts.slice(0, 3);
 
 function Index() {
-  const { t } = useLanguage();
   return (
     <>
       <HeroSlider />
 
       {/* Featured Motors */}
       <CarSlider
-        eyebrow={t("home.featured.eyebrow")}
-        title={t("home.featured.title")}
-        description={t("home.featured.desc")}
+        eyebrow="The Collection"
+        title="Featured Motors"
+        description="Hand-selected from the world's most distinguished marques. Each vehicle in our collection is a testament to engineering, heritage, and timeless desire."
         cars={featured}
       />
 
@@ -58,22 +56,22 @@ function Index() {
             </div>
             <div className="absolute -bottom-8 -right-4 md:-right-8 bg-card border border-primary/40 px-8 py-6 shadow-elegant">
               <p className="font-display text-5xl text-gradient-gold">14+</p>
-              <p className="text-xs tracking-[0.3em] uppercase text-muted-foreground mt-1">{t("home.about.years")}</p>
+              <p className="text-xs tracking-[0.3em] uppercase text-muted-foreground mt-1">Years of Excellence</p>
             </div>
           </motion.div>
 
           <div>
             <SectionHeading
-              eyebrow={t("home.about.eyebrow")}
-              title={t("home.about.title")}
-              description={t("home.about.desc")}
+              eyebrow="About Us"
+              title="A Legacy Built on Passion"
+              description="Prestige Motors was founded on a single belief: that the most extraordinary automobiles deserve to be matched with equally extraordinary clients. From our flagship Dubai showroom, we curate vehicles that reflect heritage, innovation, and uncompromising taste."
             />
             <div className="mt-10 grid grid-cols-2 gap-6">
               {[
-                { Icon: Award, t: t("home.about.authenticity"), d: t("home.about.authenticityDesc") },
-                { Icon: Shield, t: t("home.about.discretion"), d: t("home.about.discretionDesc") },
-                { Icon: Sparkles, t: t("home.about.curation"), d: t("home.about.curationDesc") },
-                { Icon: Wrench, t: t("home.about.aftercare"), d: t("home.about.aftercareDesc") },
+                { Icon: Award, t: "Authenticity", d: "Every vehicle, fully verified." },
+                { Icon: Shield, t: "Discretion", d: "Private viewings, always." },
+                { Icon: Sparkles, t: "Curation", d: "Chosen, not stocked." },
+                { Icon: Wrench, t: "Aftercare", d: "Lifetime relationship." },
               ].map(({ Icon, t: title, d }) => (
                 <div key={title} className="border-l border-primary/40 pl-4">
                   <Icon size={20} className="text-primary mb-3" />
@@ -83,7 +81,7 @@ function Index() {
               ))}
             </div>
             <Link to="/services" className="mt-10 inline-flex items-center gap-3 text-sm tracking-[0.3em] uppercase text-primary hover:gap-5 transition-all">
-              {t("home.about.cta")} <ArrowRight size={16} className="rtl:-scale-x-100" />
+              Our Services <ArrowRight size={16} />
             </Link>
           </div>
         </div>
@@ -91,9 +89,9 @@ function Index() {
 
       {/* Armoured */}
       <CarSlider
-        eyebrow={t("home.armoured.eyebrow")}
-        title={t("home.armoured.title")}
-        description={t("home.armoured.desc")}
+        eyebrow="Armoured Series"
+        title="Featured Armoured Motors"
+        description="Tactical engineering wrapped in unmistakable luxury. Our armoured fleet delivers ballistic protection without compromising the comfort and presence of the original masterpiece."
         cars={armoured}
       />
 
@@ -102,12 +100,12 @@ function Index() {
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
             <SectionHeading
-              eyebrow={t("home.editorial.eyebrow")}
-              title={t("home.editorial.title")}
-              description={t("home.editorial.desc")}
+              eyebrow="Editorial"
+              title="From the Journal"
+              description="Stories, insights, and reflections from inside the world of exceptional automobiles."
             />
             <Link to="/blogs" className="inline-flex items-center gap-3 text-sm tracking-[0.3em] uppercase text-primary hover:gap-5 transition-all">
-              {t("home.editorial.cta")} <ArrowRight size={16} className="rtl:-scale-x-100" />
+              All Stories <ArrowRight size={16} />
             </Link>
           </div>
 
@@ -132,7 +130,7 @@ function Index() {
                     <h3 className="font-display text-2xl leading-tight group-hover:text-primary transition-colors">{b.title}</h3>
                     <p className="mt-3 text-sm text-foreground/65 leading-relaxed">{b.excerpt}</p>
                     <span className="mt-4 inline-flex items-center gap-2 text-xs tracking-[0.3em] uppercase text-primary">
-                      {t("home.editorial.read")} <ArrowRight size={14} className="rtl:-scale-x-100" />
+                      Read <ArrowRight size={14} />
                     </span>
                   </article>
                 </Link>
@@ -148,19 +146,19 @@ function Index() {
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10 relative">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <SectionHeading
-              eyebrow={t("home.contact.eyebrow")}
-              title={t("home.contact.title")}
-              description={t("home.contact.desc")}
+              eyebrow="Contact Us"
+              title="Begin a Private Consultation"
+              description="Whether you're acquiring a singular piece, sourcing a rare specification, or considering an entire collection, our specialists are at your service."
             />
             <form className="space-y-5">
               <div className="grid sm:grid-cols-2 gap-5">
-                <input type="text" placeholder={t("form.name")} className="w-full bg-transparent border-b border-border py-3 px-1 text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none transition" />
-                <input type="email" placeholder={t("form.email")} className="w-full bg-transparent border-b border-border py-3 px-1 focus:border-primary focus:outline-none transition" />
+                <input type="text" placeholder="Full Name" className="w-full bg-transparent border-b border-border py-3 px-1 text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none transition" />
+                <input type="email" placeholder="Email Address" className="w-full bg-transparent border-b border-border py-3 px-1 focus:border-primary focus:outline-none transition" />
               </div>
-              <input type="text" placeholder={t("form.vehicle")} className="w-full bg-transparent border-b border-border py-3 px-1 focus:border-primary focus:outline-none transition" />
-              <textarea rows={4} placeholder={t("form.message")} className="w-full bg-transparent border-b border-border py-3 px-1 focus:border-primary focus:outline-none transition resize-none" />
+              <input type="text" placeholder="Vehicle of Interest" className="w-full bg-transparent border-b border-border py-3 px-1 focus:border-primary focus:outline-none transition" />
+              <textarea rows={4} placeholder="Your Message" className="w-full bg-transparent border-b border-border py-3 px-1 focus:border-primary focus:outline-none transition resize-none" />
               <button type="submit" className="mt-4 inline-flex items-center gap-3 px-8 py-4 bg-gradient-gold text-primary-foreground text-xs tracking-[0.3em] uppercase font-medium hover:shadow-gold transition-all">
-                {t("form.submit")} <ArrowRight size={16} className="rtl:-scale-x-100" />
+                Send Inquiry <ArrowRight size={16} />
               </button>
             </form>
           </div>

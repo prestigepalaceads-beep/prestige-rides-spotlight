@@ -11,7 +11,6 @@ import {
 import appCss from "../styles.css?url";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { LanguageProvider } from "@/hooks/use-language";
 
 function NotFoundComponent() {
   return (
@@ -113,13 +112,11 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <LanguageProvider>
-        <SiteHeader />
-        <main className="min-h-screen">
-          <Outlet />
-        </main>
-        <SiteFooter />
-      </LanguageProvider>
+      <SiteHeader />
+      <main className="min-h-screen">
+        <Outlet />
+      </main>
+      <SiteFooter />
     </QueryClientProvider>
   );
 }
