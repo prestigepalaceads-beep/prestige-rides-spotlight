@@ -137,7 +137,7 @@ function CarDetailPage() {
                     <button
                       key={i}
                       onClick={() => setLightbox(i)}
-                      className="group relative aspect-[4/3] overflow-hidden rounded-md border border-border hover:border-primary/60 transition"
+                      className="group relative aspect-[4/3] overflow-hidden rounded-xl border border-border hover:border-primary/60 transition"
                       aria-label={`Open photo ${i + 1}`}
                     >
                       <img
