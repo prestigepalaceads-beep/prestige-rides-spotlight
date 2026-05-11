@@ -1,0 +1,1 @@
+import{j as t,L as e}from"./index-BgF0K_iG.js";const s=()=>t.jsxs("div",{className:"pt-40 pb-32 text-center",children:[t.jsx("h1",{className:"font-display text-4xl mb-4",children:"Vehicle not found"}),t.jsx(e,{to:"/cars",className:"text-primary tracking-[0.3em] uppercase text-xs",children:"Back to collection"})]});export{s as notFoundComponent};
