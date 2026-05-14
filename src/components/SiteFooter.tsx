@@ -30,12 +30,10 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h4 className="text-xs uppercase tracking-[0.3em] text-primary mb-6">Categories</h4>
+            <h4 className="text-xs uppercase tracking-[0.3em] text-primary mb-6">Legal</h4>
             <ul className="space-y-3 text-sm text-foreground/75">
-              <li>Featured Motors</li>
-              <li>Armoured Vehicles</li>
-              <li>Limited Editions</li>
-              <li>Pre-owned</li>
+              <li><Link to="/privacy" className="hover:text-primary transition">Privacy Policy</Link></li>
+              <li><Link to="/terms" className="hover:text-primary transition">Terms & Conditions</Link></li>
             </ul>
           </div>
 
