@@ -68,6 +68,13 @@ function ContactPage() {
           </button>
         </form>
       </div>
+
+      <section className="mt-24 mx-auto max-w-[1400px] px-6 lg:px-10">
+        <SectionHeading eyebrow="Find Us" title="Our Location" center />
+        <div className="mt-10">
+          <SiteMap className="h-[420px] md:h-[520px]" />
+        </div>
+      </section>
     </div>
   );
 }
