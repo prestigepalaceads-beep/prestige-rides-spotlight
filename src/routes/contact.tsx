@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { MapPin, Phone, Mail, Clock, ArrowRight } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
+import { SiteMap } from "@/components/SiteMap";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -67,6 +68,13 @@ function ContactPage() {
           </button>
         </form>
       </div>
+
+      <section className="mt-24 mx-auto max-w-[1400px] px-6 lg:px-10">
+        <SectionHeading eyebrow="Find Us" title="Our Location" center />
+        <div className="mt-10">
+          <SiteMap className="h-[420px] md:h-[520px]" />
+        </div>
+      </section>
     </div>
   );
 }
