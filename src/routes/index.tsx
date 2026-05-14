@@ -151,7 +151,7 @@ function Index() {
             center
           />
           <div className="mt-14">
-            <SiteMap className="h-[420px] md:h-[520px]" />
+            <SiteMap className="aspect-[4/5] sm:aspect-[16/10] lg:aspect-[21/9] max-h-[560px]" />
           </div>
         </div>
       </section>
