@@ -4,6 +4,7 @@ import { ArrowRight, Shield, Wrench, Sparkles, Award } from "lucide-react";
 import { HeroSlider } from "@/components/HeroSlider";
 import { CarSlider, type Car } from "@/components/CarSlider";
 import { SectionHeading } from "@/components/SectionHeading";
+import { SiteMap } from "@/components/SiteMap";
 import { cars as allCars } from "@/data/cars";
 import { blogPosts } from "@/data/blogs";
 import about from "@/assets/about.jpg";
@@ -136,6 +137,21 @@ function Index() {
                 </Link>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Find Us */}
+      <section className="py-24 md:py-32 bg-onyx">
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+          <SectionHeading
+            eyebrow="Visit Us"
+            title="Find Our Showroom"
+            description="Step inside our flagship gallery on Sheikh Zayed Road, Dubai — where every vehicle is presented with the reverence it deserves."
+            center
+          />
+          <div className="mt-14">
+            <SiteMap className="h-[420px] md:h-[520px]" />
           </div>
         </div>
       </section>
