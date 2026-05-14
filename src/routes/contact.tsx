@@ -72,7 +72,7 @@ function ContactPage() {
       <section className="mt-24 mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionHeading eyebrow="Find Us" title="Our Location" center />
         <div className="mt-10">
-          <SiteMap className="h-[420px] md:h-[520px]" />
+          <SiteMap className="aspect-[4/5] sm:aspect-[16/10] lg:aspect-[21/9] max-h-[560px]" />
         </div>
       </section>
     </div>
