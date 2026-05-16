@@ -36,7 +36,18 @@ const slides = [
 ] as const;
 
 export function HeroSlider() {
-  const [emblaRef, embla] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 6000, stopOnInteraction: false })]);
+  const [direction, setDirection] = useState<"ltr" | "rtl">("ltr");
+  useEffect(() => {
+    const read = () => {
+      const d = document.documentElement.dir || document.documentElement.getAttribute("lang");
+      setDirection(d === "rtl" || d === "ar" ? "rtl" : "ltr");
+    };
+    read();
+    const obs = new MutationObserver(read);
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["dir", "lang"] });
+    return () => obs.disconnect();
+  }, []);
+  const [emblaRef, embla] = useEmblaCarousel({ loop: true, direction }, [Autoplay({ delay: 6000, stopOnInteraction: false })]);
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -45,6 +56,10 @@ export function HeroSlider() {
     embla.on("select", onSelect);
     onSelect();
   }, [embla]);
+
+  useEffect(() => {
+    embla?.reInit({ loop: true, direction });
+  }, [embla, direction]);
 
   return (
     <section className="relative h-[100svh] min-h-[640px] w-full overflow-hidden bg-onyx">

@@ -22,12 +22,27 @@ interface Props {
 }
 
 export function CarSlider({ eyebrow, title, description, cars }: Props) {
+  const [direction, setDirection] = useState<"ltr" | "rtl">("ltr");
+  useEffect(() => {
+    const read = () => {
+      const d = document.documentElement.dir || document.documentElement.getAttribute("lang");
+      setDirection(d === "rtl" || d === "ar" ? "rtl" : "ltr");
+    };
+    read();
+    const obs = new MutationObserver(read);
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["dir", "lang"] });
+    return () => obs.disconnect();
+  }, []);
   const [emblaRef, embla] = useEmblaCarousel({
     align: "start",
     loop: false,
     slidesToScroll: 1,
+    direction,
     breakpoints: { "(min-width: 1024px)": { slidesToScroll: 2 } },
   });
+  useEffect(() => {
+    embla?.reInit({ direction });
+  }, [embla, direction]);
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(true);
 
