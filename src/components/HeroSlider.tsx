@@ -73,7 +73,7 @@ export function HeroSlider() {
 
   return (
     <section className="relative h-[100svh] min-h-[640px] w-full overflow-hidden bg-onyx">
-      <div className="h-full" ref={emblaRef}>
+      <div className="h-full" ref={emblaRef} dir={direction}>
         <div className="flex h-full">
           {slides.map((s, i) => (
             <div key={i} className="relative flex-[0_0_100%] h-full">
