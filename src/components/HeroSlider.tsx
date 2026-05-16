@@ -1,12 +1,13 @@
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import b1 from "@/assets/banner-1.jpg";
 import b2 from "@/assets/banner-2.jpg";
 import b3 from "@/assets/banner-3.jpg";
+import { useDocumentDirection } from "@/hooks/use-document-direction";
 
 const slides = [
   {
@@ -36,28 +37,13 @@ const slides = [
 ] as const;
 
 export function HeroSlider() {
-  const [direction, setDirection] = useState<"ltr" | "rtl">("ltr");
-  useEffect(() => {
-    const read = () => {
-      const htmlDir = document.documentElement.dir;
-      const lang = document.documentElement.getAttribute("lang") || "";
-      const computed = getComputedStyle(document.body).direction;
-      const isRtl =
-        htmlDir === "rtl" ||
-        computed === "rtl" ||
-        lang.toLowerCase().startsWith("ar") ||
-        lang.toLowerCase().startsWith("he") ||
-        lang.toLowerCase().startsWith("fa") ||
-        lang.toLowerCase().startsWith("ur");
-      setDirection(isRtl ? "rtl" : "ltr");
-    };
-    read();
-    const obs = new MutationObserver(read);
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["dir", "lang", "class"] });
-    obs.observe(document.body, { attributes: true, attributeFilter: ["dir", "lang", "class"] });
-    return () => obs.disconnect();
-  }, []);
-  const [emblaRef, embla] = useEmblaCarousel({ loop: true, direction }, [Autoplay({ delay: 6000, stopOnInteraction: false })]);
+  const direction = useDocumentDirection();
+  const options = useMemo<NonNullable<Parameters<typeof useEmblaCarousel>[0]>>(
+    () => ({ loop: true, direction }),
+    [direction],
+  );
+  const plugins = useMemo(() => [Autoplay({ delay: 6000, stopOnInteraction: false })], []);
+  const [emblaRef, embla] = useEmblaCarousel(options, plugins);
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -66,10 +52,6 @@ export function HeroSlider() {
     embla.on("select", onSelect);
     onSelect();
   }, [embla]);
-
-  useEffect(() => {
-    embla?.reInit({ loop: true, direction });
-  }, [embla, direction]);
 
   return (
     <section className="relative h-[100svh] min-h-[640px] w-full overflow-hidden bg-onyx">
