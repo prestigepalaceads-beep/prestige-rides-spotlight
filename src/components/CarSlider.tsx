@@ -118,7 +118,7 @@ export function CarSlider({ eyebrow, title, description, cars }: Props) {
           </div>
         </div>
 
-        <div className="overflow-hidden -mx-3" ref={emblaRef}>
+        <div className="overflow-hidden -mx-3" ref={emblaRef} dir={direction}>
           <div className="flex">
             {cars.map((car, i) => (
               <div key={i} className="flex-[0_0_85%] sm:flex-[0_0_60%] md:flex-[0_0_45%] lg:flex-[0_0_42%] xl:flex-[0_0_38%] px-3">
