@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { cars, brands, type CarStatus, type CarCategory } from "@/data/cars";
 import { SlidersHorizontal, X } from "lucide-react";
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
 
 export const Route = createFileRoute("/cars/")({
   head: () => ({
