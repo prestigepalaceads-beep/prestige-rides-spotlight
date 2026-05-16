@@ -25,12 +25,22 @@ export function CarSlider({ eyebrow, title, description, cars }: Props) {
   const [direction, setDirection] = useState<"ltr" | "rtl">("ltr");
   useEffect(() => {
     const read = () => {
-      const d = document.documentElement.dir || document.documentElement.getAttribute("lang");
-      setDirection(d === "rtl" || d === "ar" ? "rtl" : "ltr");
+      const htmlDir = document.documentElement.dir;
+      const lang = document.documentElement.getAttribute("lang") || "";
+      const computed = getComputedStyle(document.body).direction;
+      const isRtl =
+        htmlDir === "rtl" ||
+        computed === "rtl" ||
+        lang.toLowerCase().startsWith("ar") ||
+        lang.toLowerCase().startsWith("he") ||
+        lang.toLowerCase().startsWith("fa") ||
+        lang.toLowerCase().startsWith("ur");
+      setDirection(isRtl ? "rtl" : "ltr");
     };
     read();
     const obs = new MutationObserver(read);
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["dir", "lang"] });
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["dir", "lang", "class"] });
+    obs.observe(document.body, { attributes: true, attributeFilter: ["dir", "lang", "class"] });
     return () => obs.disconnect();
   }, []);
   const [emblaRef, embla] = useEmblaCarousel({
@@ -41,7 +51,13 @@ export function CarSlider({ eyebrow, title, description, cars }: Props) {
     breakpoints: { "(min-width: 1024px)": { slidesToScroll: 2 } },
   });
   useEffect(() => {
-    embla?.reInit({ direction });
+    embla?.reInit({
+      align: "start",
+      loop: false,
+      slidesToScroll: 1,
+      direction,
+      breakpoints: { "(min-width: 1024px)": { slidesToScroll: 2 } },
+    });
   }, [embla, direction]);
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(true);
@@ -102,7 +118,7 @@ export function CarSlider({ eyebrow, title, description, cars }: Props) {
           </div>
         </div>
 
-        <div className="overflow-hidden -mx-3" ref={emblaRef}>
+        <div className="overflow-hidden -mx-3" ref={emblaRef} dir={direction}>
           <div className="flex">
             {cars.map((car, i) => (
               <div key={i} className="flex-[0_0_85%] sm:flex-[0_0_60%] md:flex-[0_0_45%] lg:flex-[0_0_42%] xl:flex-[0_0_38%] px-3">
