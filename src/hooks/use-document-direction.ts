@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 
 const RTL_LANG_PREFIXES = ["ar", "he", "fa", "ur"] as const;
+const ARABIC_SCRIPT_REGEX = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]/;
+const AUTO_DIR_ATTR = "data-auto-dir";
 
 function readDocumentDirection(): "ltr" | "rtl" {
   if (typeof document === "undefined") return "ltr";
 
   const html = document.documentElement;
   const body = document.body;
-  const htmlComputedDirection = getComputedStyle(html).direction;
-  const bodyComputedDirection = body ? getComputedStyle(body).direction : "";
+  const isAutoManaged = html.getAttribute(AUTO_DIR_ATTR) === "true";
+  const htmlComputedDirection = isAutoManaged ? "" : getComputedStyle(html).direction;
+  const bodyComputedDirection = isAutoManaged || !body ? "" : getComputedStyle(body).direction;
   const languageCandidates = [
     html.lang,
     html.getAttribute("lang") || "",
@@ -20,17 +23,18 @@ function readDocumentDirection(): "ltr" | "rtl" {
   const isRtlLanguage = languageCandidates.some((value) =>
     RTL_LANG_PREFIXES.some((prefix) => value.startsWith(prefix)),
   );
+  const hasArabicScript = ARABIC_SCRIPT_REGEX.test(body?.innerText.slice(0, 2000) || "");
 
   const isRtlDirection = [
-    html.dir,
-    html.getAttribute("dir") || "",
-    body?.dir || "",
-    body?.getAttribute("dir") || "",
+    isAutoManaged ? "" : html.dir,
+    isAutoManaged ? "" : html.getAttribute("dir") || "",
+    isAutoManaged ? "" : body?.dir || "",
+    isAutoManaged ? "" : body?.getAttribute("dir") || "",
     htmlComputedDirection,
     bodyComputedDirection,
   ].includes("rtl");
 
-  return isRtlDirection || isRtlLanguage ? "rtl" : "ltr";
+  return isRtlDirection || isRtlLanguage || hasArabicScript ? "rtl" : "ltr";
 }
 
 export function useDocumentDirection() {
@@ -40,8 +44,15 @@ export function useDocumentDirection() {
     if (typeof document === "undefined") return;
 
     const syncDirection = () => {
+      const next = readDocumentDirection();
+      document.documentElement.setAttribute("dir", next);
+      document.documentElement.setAttribute(AUTO_DIR_ATTR, "true");
+      if (document.body) {
+        document.body.setAttribute("dir", next);
+        document.body.setAttribute(AUTO_DIR_ATTR, "true");
+      }
+
       setDirection((current) => {
-        const next = readDocumentDirection();
         return current === next ? current : next;
       });
     };
@@ -58,6 +69,12 @@ export function useDocumentDirection() {
       observer.observe(document.body, {
         attributes: true,
         attributeFilter: ["dir", "lang", "class", "style"],
+      });
+
+      observer.observe(document.body, {
+        childList: true,
+        characterData: true,
+        subtree: true,
       });
     }
 
