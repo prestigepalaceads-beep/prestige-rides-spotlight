@@ -1,5 +1,5 @@
 import useEmblaCarousel from "embla-carousel-react";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
@@ -24,13 +24,16 @@ interface Props {
 
 export function CarSlider({ eyebrow, title, description, cars }: Props) {
   const direction = useDocumentDirection();
-  const options = useMemo(() => ({
-    align: "start",
-    loop: false,
-    slidesToScroll: 1,
-    direction,
-    breakpoints: { "(min-width: 1024px)": { slidesToScroll: 2 } },
-  }), [direction]);
+  const options = useMemo<NonNullable<Parameters<typeof useEmblaCarousel>[0]>>(
+    () => ({
+      align: "start",
+      loop: false,
+      slidesToScroll: 1,
+      direction,
+      breakpoints: { "(min-width: 1024px)": { slidesToScroll: 2 } },
+    }),
+    [direction],
+  );
   const [emblaRef, embla] = useEmblaCarousel(options);
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(true);
