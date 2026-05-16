@@ -93,7 +93,7 @@ function CarsPage() {
             <button
               key={s}
               onClick={() => setCategory(s)}
-              className={`py-2 text-[11px] tracking-[0.25em] uppercase border transition ${
+              className={`py-2 px-1 text-[10px] sm:text-[11px] tracking-[0.12em] uppercase border transition ${
                 category === s
                   ? "border-primary bg-primary/10 text-primary"
                   : "border-border text-foreground/70 hover:border-primary/50"
