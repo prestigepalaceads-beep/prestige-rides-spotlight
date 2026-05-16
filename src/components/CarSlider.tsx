@@ -1,8 +1,9 @@
 import useEmblaCarousel from "embla-carousel-react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
+import { useDocumentDirection } from "@/hooks/use-document-direction";
 
 export type Car = {
   slug?: string;
@@ -22,43 +23,15 @@ interface Props {
 }
 
 export function CarSlider({ eyebrow, title, description, cars }: Props) {
-  const [direction, setDirection] = useState<"ltr" | "rtl">("ltr");
-  useEffect(() => {
-    const read = () => {
-      const htmlDir = document.documentElement.dir;
-      const lang = document.documentElement.getAttribute("lang") || "";
-      const computed = getComputedStyle(document.body).direction;
-      const isRtl =
-        htmlDir === "rtl" ||
-        computed === "rtl" ||
-        lang.toLowerCase().startsWith("ar") ||
-        lang.toLowerCase().startsWith("he") ||
-        lang.toLowerCase().startsWith("fa") ||
-        lang.toLowerCase().startsWith("ur");
-      setDirection(isRtl ? "rtl" : "ltr");
-    };
-    read();
-    const obs = new MutationObserver(read);
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["dir", "lang", "class"] });
-    obs.observe(document.body, { attributes: true, attributeFilter: ["dir", "lang", "class"] });
-    return () => obs.disconnect();
-  }, []);
-  const [emblaRef, embla] = useEmblaCarousel({
+  const direction = useDocumentDirection();
+  const options = useMemo(() => ({
     align: "start",
     loop: false,
     slidesToScroll: 1,
     direction,
     breakpoints: { "(min-width: 1024px)": { slidesToScroll: 2 } },
-  });
-  useEffect(() => {
-    embla?.reInit({
-      align: "start",
-      loop: false,
-      slidesToScroll: 1,
-      direction,
-      breakpoints: { "(min-width: 1024px)": { slidesToScroll: 2 } },
-    });
-  }, [embla, direction]);
+  }), [direction]);
+  const [emblaRef, embla] = useEmblaCarousel(options);
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(true);
 
