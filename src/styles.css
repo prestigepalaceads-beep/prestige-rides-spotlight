@@ -4,6 +4,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+:root {
+  color-scheme: dark;
+}
+
 /* Self-hosted display + body fonts */
 @font-face {
   font-family: "Michroma";
@@ -120,6 +124,7 @@
 }
 
 .light {
+  color-scheme: light;
   --background: oklch(0.97 0.015 75);
   --foreground: oklch(0.22 0.04 55);
 

@@ -56,7 +56,7 @@ function CarsPage() {
         <select
           value={brand}
           onChange={(e) => setBrand(e.target.value)}
-          className="w-full bg-transparent border border-border py-2.5 px-3 text-sm focus:border-primary outline-none"
+          className="w-full bg-background text-foreground border border-border py-2.5 px-3 text-sm focus:border-primary outline-none"
         >
           <option value="All">All Brands</option>
           {brands.map((b) => (
