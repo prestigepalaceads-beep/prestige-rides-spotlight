@@ -39,12 +39,22 @@ export function HeroSlider() {
   const [direction, setDirection] = useState<"ltr" | "rtl">("ltr");
   useEffect(() => {
     const read = () => {
-      const d = document.documentElement.dir || document.documentElement.getAttribute("lang");
-      setDirection(d === "rtl" || d === "ar" ? "rtl" : "ltr");
+      const htmlDir = document.documentElement.dir;
+      const lang = document.documentElement.getAttribute("lang") || "";
+      const computed = getComputedStyle(document.body).direction;
+      const isRtl =
+        htmlDir === "rtl" ||
+        computed === "rtl" ||
+        lang.toLowerCase().startsWith("ar") ||
+        lang.toLowerCase().startsWith("he") ||
+        lang.toLowerCase().startsWith("fa") ||
+        lang.toLowerCase().startsWith("ur");
+      setDirection(isRtl ? "rtl" : "ltr");
     };
     read();
     const obs = new MutationObserver(read);
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["dir", "lang"] });
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["dir", "lang", "class"] });
+    obs.observe(document.body, { attributes: true, attributeFilter: ["dir", "lang", "class"] });
     return () => obs.disconnect();
   }, []);
   const [emblaRef, embla] = useEmblaCarousel({ loop: true, direction }, [Autoplay({ delay: 6000, stopOnInteraction: false })]);
