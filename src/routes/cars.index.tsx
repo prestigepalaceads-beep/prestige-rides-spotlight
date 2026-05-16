@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { cars, brands, type CarStatus, type CarCategory } from "@/data/cars";
 import { SlidersHorizontal, X } from "lucide-react";
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
 
 export const Route = createFileRoute("/cars/")({
   head: () => ({
@@ -88,21 +89,32 @@ function CarsPage() {
 
       <div>
         <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">Category</p>
-        <div className="grid grid-cols-3 gap-2">
-          {(["All", "Normal", "Armoured"] as const).map((s) => (
-            <button
-              key={s}
-              onClick={() => setCategory(s)}
-              className={`py-2 px-1 text-[10px] sm:text-[11px] tracking-[0.12em] uppercase border transition ${
-                category === s
-                  ? "border-primary bg-primary/10 text-primary"
-                  : "border-border text-foreground/70 hover:border-primary/50"
-              }`}
-            >
-              {s}
-            </button>
-          ))}
-        </div>
+        <TooltipProvider delayDuration={200}>
+          <div className="grid grid-cols-3 gap-2">
+            {(["All", "Normal", "Armoured"] as const).map((s) => {
+              const label = s === "Normal" ? "Norm" : s === "Armoured" ? "Arm" : s;
+              return (
+                <Tooltip key={s}>
+                  <TooltipTrigger asChild>
+                    <button
+                      onClick={() => setCategory(s)}
+                      className={`py-2 px-1 text-[10px] sm:text-[11px] tracking-[0.12em] uppercase border transition ${
+                        category === s
+                          ? "border-primary bg-primary/10 text-primary"
+                          : "border-border text-foreground/70 hover:border-primary/50"
+                      }`}
+                    >
+                      {label}
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent side="top">
+                    <p>{s}</p>
+                  </TooltipContent>
+                </Tooltip>
+              );
+            })}
+          </div>
+        </TooltipProvider>
       </div>
 
       <div>
